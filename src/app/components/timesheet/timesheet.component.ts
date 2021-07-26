@@ -5,6 +5,7 @@ import { FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { Department } from 'src/app/interfaces/department';
 import { Employee } from 'src/app/interfaces/employee';
+import { tokenReference } from '@angular/compiler';
 
 @Component({
   selector: 'app-timesheet',
@@ -63,4 +64,14 @@ export class TimesheetComponent implements OnInit {
       return error;
     };
   }
+
+  getTotalHours(employee: Employee): number {
+    let totalHours: number = employee.sunday + employee.monday + employee.tuesday + employee.wednesday + employee.thursday + employee.friday + employee.saturday;
+    return totalHours;
+  }
+
+  deleteEmployee(index: number): void {
+    this.employees.splice(index, 1);
+  }
+
 }
