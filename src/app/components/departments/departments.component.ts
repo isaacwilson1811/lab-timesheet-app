@@ -1,6 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
 import { DepartmentsService } from '../../services/departments.service';
 import { Department } from '../../interfaces/department';
 
@@ -13,6 +15,7 @@ import { Department } from '../../interfaces/department';
 
 export class DepartmentsComponent implements OnInit{
   departments: Department[] = [];
+  $departments: Observable<Department[]>;
 
   constructor(
     private departmentsService: DepartmentsService,
@@ -20,9 +23,10 @@ export class DepartmentsComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.departmentsService.getDepartments().subscribe( departments => {
-      this.departments = departments;
-    });
+    // this.departmentsService.getDepartments().subscribe( departments => {
+    //   this.departments = departments;
+    // });
+    this.$departments = this.departmentsService.getDepartments();
   }
 
   goToDepartment(departmentId: string): void {
