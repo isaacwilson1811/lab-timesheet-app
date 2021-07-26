@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { Department } from '../interfaces/department';
 
 @Injectable({
@@ -10,4 +13,12 @@ export class DepartmentsService {
     {id: '2', name: 'Sales'},
     {id: '3', name: 'Finance'},
   ];
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getDepartments(): Observable<Department[]> {
+    return this.http.get<Department[]>(`https://hr-timesheet-test.firebaseio.com/departments.json`);
+  }
 }
