@@ -31,6 +31,9 @@ export class TimesheetComponent implements OnInit {
   ngOnInit(): void {
     this.departments = this.departmentsService.departments;
     this.department = this.departments.find(department => department.id === this.route.snapshot.params['id']);
+    this.employeeService.getEmployeeHoursByDepartment(this.department.id).subscribe(employees => {
+      this.employees = employees;
+    });
   }
 
   addEmployee(): void {
