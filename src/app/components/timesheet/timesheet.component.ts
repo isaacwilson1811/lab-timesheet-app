@@ -80,10 +80,10 @@ export class TimesheetComponent implements OnInit {
   }
 
   submit(): void {
-    this.employees.forEach(employee => {
-        this.employeeService.saveEmployeeHours(employee);
+    this.employees.forEach( employee => {
+      if (employee.id) { this.employeeService.updateEmployeeHours(employee) }
+      else { this.employeeService.saveEmployeeHours(employee) }
     });
-
     this.router.navigate(['./departments']);
   }
 
